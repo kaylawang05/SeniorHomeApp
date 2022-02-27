@@ -22,6 +22,7 @@
 ### To use the GUI application, run the follow to scripts:
 - tk_display.py to manage tenant/visitor/car_license_plate information
 - tk_signInOut.py to sign in and sign out
+To run the .py scripts, you need to "chmod 755 *.py"
 
 ### Update the apartment data (tenant names, visitor names, car info):
 ```
