@@ -86,7 +86,7 @@ def check_args():
         if item:
             found = found + 1
             
-    if found is not 1:
+    if found != 1:
         print ("Error: You have to use one of the three options [-t|-v|-c] followed by -n <aptNum>")
         usage()
         sys.exit(2)
