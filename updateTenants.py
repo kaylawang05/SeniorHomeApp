@@ -1,4 +1,3 @@
-#!/usr/bin/python2
 import os
 import json
 import sys
@@ -108,7 +107,7 @@ def display_current(data, update_item, anum):
 def what_to_do(update_item):
     ans = None
     while ans is None:
-        ans = raw_input("Do you want to add or delete " + update_item + "? a for add, and d for delete, e to exit: ")
+        ans = input("Do you want to add or delete " + update_item + "? a for add, and d for delete, e to exit: ")
         if ans == "e":
             sys.exit(0)
         elif ans != "a" and ans != "d":
@@ -120,7 +119,7 @@ def what_to_do(update_item):
 # Get user's input on what to do (add or delete)
 # --------------------------------------------------
 def add(data, update_item, anum):
-    newitem = raw_input("What is the name of the " + update_item + " do you want to add: ")
+    newitem = input("What is the name of the " + update_item + " do you want to add: ")
     print ("We will add " + newitem)
     for unit in data:
         if unit["aptnum"] == int(anum):
@@ -145,7 +144,7 @@ def delete(data, update_item, anum):
                     index = index + 1
                 choice = None
                 while choice is None:    
-                    choice = raw_input("Enter a number (e to exit): ")
+                    choice = input("Enter a number (e to exit): ")
                     if choice == "e":
                         sys.exit(0)
                     elif int(choice) < 1 or int(choice) > index:

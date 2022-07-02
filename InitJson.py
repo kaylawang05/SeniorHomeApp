@@ -30,7 +30,7 @@ aNum = input("What aprtment are you visiting? Enter apt number (e.g. 216): ")
 print("You entered: " + str(aNum))
 
 while aNum not in aNumbers:
-    aNum = raw_input(str(aNum) + " is not a valid apartment number, please try again or enter e to exit: ")
+    aNum = input(str(aNum) + " is not a valid apartment number, please try again or enter e to exit: ")
     if aNum == "e":
         print("Good Bye...")
         sys.exit(0)
@@ -40,4 +40,4 @@ for unit in aList:
     if unit["AptNum"] == aNum:
         print(unit)
 
-ans = raw_input("Do you want to edit the info? Enter y for yes, and n for no: ")
+ans = input("Do you want to edit the info? Enter y for yes, and n for no: ")

@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from cgitb import text
 import json
 from tkinter import *

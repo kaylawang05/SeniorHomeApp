@@ -1,4 +1,3 @@
-#!/usr/bin/python2
 import os
 import json
 import sys
@@ -17,7 +16,7 @@ todays_tmp_log = "logs/tmp_" + today
 def what_to_do():
     ans = None
     while ans is None:
-        ans = raw_input("Are you signing in or signing out? (i for signin, o for sign out, e for exit): ")
+        ans = input("Are you signing in or signing out? (i for signin, o for sign out, e for exit): ")
         if ans == "e":
             sys.exit(0)
         elif ans != "i" and ans != "o":
@@ -29,7 +28,7 @@ def what_to_do():
 def get_apt():
     aptnum = None
     while aptnum is None:    
-        aptnum = raw_input("Enter APT number, e.g. 305 (e to exit): ")
+        aptnum = input("Enter APT number, e.g. 305 (e to exit): ")
         if aptnum == "e":
             sys.exit(0)
         else:
@@ -71,7 +70,7 @@ def get_visitors(aptnum):
         print (" " + str(index) + ") " + v)
 
     while choice is None:
-        choice = raw_input("Enter the number of the visitor you are signing in, e.g. 1 or 1,2 (a for all, e to exit): ")
+        choice = input("Enter the number of the visitor you are signing in, e.g. 1 or 1,2 (a for all, e to exit): ")
         if choice == "e":
             sys.exit(0)
 
