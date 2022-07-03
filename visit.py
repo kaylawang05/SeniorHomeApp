@@ -1,8 +1,10 @@
 import datetime
 import os
 
+from databases import ApartmentDatabase
+
 class VisitorManager:
-    def __init__(self, apt_database, log_dir):
+    def __init__(self, apt_database: ApartmentDatabase, log_dir: str):
         self.apt_database = apt_database
         self.log_dir = log_dir
         self.signed_in = []
@@ -21,19 +23,15 @@ class VisitorManager:
 
         sign_out_time = datetime.datetime.now().strftime("%H:%M")
 
-        flag = False
-
         for a, n, t in self.signed_in:
             if a == apt and n == name:
-                flag = True
-                break
+                self.add_log(f"{apt},{name},{t},{sign_out_time}")
+                self.signed_in.remove((a,n,t))
+                return
 
-        if flag:
-            self.add_log(f"{apt},{name},{t},{sign_out_time}")
-            self.signed_in.remove((a,n,t))
-        else:
-            print(f"error: {name} not found in room {apt}")
-            quit()
+        print(f"error: {name} not found in room {apt}")
+        quit()
+            
         
 
     def add_log(self, text):

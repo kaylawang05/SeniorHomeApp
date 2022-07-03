@@ -21,16 +21,12 @@ class ApartmentDatabase:
         print(f"error: room '{apt}' does not exist")
         quit()
 
-
-    def __len__(self):
-        return len(self.data)
-
-    def __iter__(self):
-        return iter(self.data)
-
     def save(self):
-        with open(self.path, "w+") as f:
-            f.write(json.dumps(self.data))
+        try:
+            with open(self.path, "w+") as f:
+                f.write(json.dumps(self.data))
+        except:
+            print(":: could not save apartment file for some reason, ignoring...")
 
     # returns the list of rows in descending order of similarity along with its similarity value
     def query(self, query, limit=5):
