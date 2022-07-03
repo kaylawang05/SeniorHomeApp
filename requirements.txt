@@ -1,0 +1,2 @@
+fuzzywuzzy          # for fuzzy search algorithm
+python-Levenshtein  # accelerate the fuzzy search algorithm
