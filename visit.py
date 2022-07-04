@@ -3,8 +3,10 @@ import os
 
 from databases import ApartmentDatabase
 
+# TODO: Cannot use csv format since people can put commas in their name, use json format instead
+
 class VisitorManager:
-    def __init__(self, apt_database: ApartmentDatabase, log_dir: str):
+    def __init__(self, apt_database: ApartmentDatabase, log_dir):
         self.apt_database = apt_database
         self.log_dir = log_dir
         self.signed_in = []
@@ -31,8 +33,6 @@ class VisitorManager:
 
         print(f"error: {name} not found in room {apt}")
         quit()
-            
-        
 
     def add_log(self, text):
         date = datetime.date.today()

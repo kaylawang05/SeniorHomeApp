@@ -1,1 +1,123 @@
-[{"apt": 69, "tenants": ["alice", "bob", "cindy"], "visitors": ["david", "ethan", "frank", "bruh"]}, {"apt": 420, "tenants": ["alex", "ben", "catherine"], "visitors": ["daniel", "elise", "francis"]}, {"apt": 101, "tenants": ["Tanya"], "visitors": ["John Watson", "Mary Watson"]}, {"apt": 102, "tenants": ["Mike Bowen"], "visitors": ["Tom"]}, {"apt": 103, "tenants": ["Gail Lee"], "visitors": []}, {"apt": 104, "tenants": [], "visitors": []}, {"apt": 105, "tenants": [], "visitors": []}, {"apt": 201, "tenants": ["john", "mary"], "visitors": ["Jerry", "Eric Wang", "Tom"]}, {"apt": 202, "tenants": [], "visitors": []}, {"apt": 203, "tenants": [], "visitors": []}, {"apt": 204, "tenants": [], "visitors": []}, {"apt": 205, "tenants": [], "visitors": ["Barack Obama"]}, {"apt": 301, "tenants": [], "visitors": []}, {"apt": 302, "tenants": [], "visitors": []}, {"apt": 303, "tenants": [], "visitors": []}, {"apt": 304, "tenants": [], "visitors": []}, {"apt": 305, "tenants": [], "visitors": []}]
+[
+    {
+        "number": 69,
+        "tenants": [
+            "alice",
+            "bob",
+            "cindy"
+        ],
+        "visitors": [
+            "david",
+            "ethan",
+            "frank"
+        ]
+    },
+    {
+        "number": 420,
+        "tenants": [
+            "alex",
+            "ben",
+            "catherine"
+        ],
+        "visitors": [
+            "daniel",
+            "elise",
+            "francis"
+        ]
+    },
+    {
+        "number": 101,
+        "tenants": [
+            "Tanya"
+        ],
+        "visitors": [
+            "John Watson",
+            "Mary Watson"
+        ]
+    },
+    {
+        "number": 102,
+        "tenants": [
+            "Mike Bowen"
+        ],
+        "visitors": [
+            "Tom"
+        ]
+    },
+    {
+        "number": 103,
+        "tenants": [
+            "Gail Lee"
+        ],
+        "visitors": []
+    },
+    {
+        "number": 104,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 105,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 201,
+        "tenants": [
+            "john",
+            "mary"
+        ],
+        "visitors": [
+            "Jerry",
+            "Eric Wang",
+            "Tom"
+        ]
+    },
+    {
+        "number": 202,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 203,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 204,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 205,
+        "tenants": [],
+        "visitors": [
+            "Barack Obama"
+        ]
+    },
+    {
+        "number": 301,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 302,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 303,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 304,
+        "tenants": [],
+        "visitors": []
+    },
+    {
+        "number": 305,
+        "tenants": [],
+        "visitors": []
+    }
+]
