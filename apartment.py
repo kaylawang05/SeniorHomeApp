@@ -4,8 +4,7 @@ import json
 from fuzzywuzzy import process
 from returns.result import Result, Failure, Success
 
-from dataclasses import dataclass
-import json
+from errors import Error
 
 @dataclass
 class Apartment:
@@ -37,18 +36,14 @@ class ApartmentDecoder(json.JSONDecoder):
 class ApartmentDatabase:
     def __init__(self, path: str):
         self.path = path
-
         with open(path, "r") as f:
             self.rows: list[Apartment] = json.load(f, cls=ApartmentDecoder)
-
         self.apt_to_row = {apt.number: i for i, apt in enumerate(self.rows)}
 
-    def get_apt(self, apt: int) -> Result[Apartment, str]:
-        if apt not in self.apt_to_row:
-            return Failure(f"Apartment '{apt}' not found in database")
-        
-        rn = self.apt_to_row[apt]
-
+    def get_apt(self, number: int) -> Result[Apartment, Error]:
+        if number not in self.apt_to_row:
+            return Failure(Error.ApartmentNotFound)
+        rn = self.apt_to_row[number]
         return Success(self.rows[rn])
             
     def save(self):
@@ -58,37 +53,41 @@ class ApartmentDatabase:
     def query(self, query, limit=5) -> list[Apartment]:
         return process.extract(str(query), self.rows, limit=limit)
 
-    def remove_visitor(self, number: int, name: str) -> Result[None, str]:
+    def remove_visitor(self, number: int, name: str) -> Result[None, Error]:
         match self.get_apt(number):
             case Success(apt):
                 if name not in apt.visitors:
-                    return Failure(f"'{name}' is not a visitor of apartment '{number}'")
+                    return Failure(Error.VisitorNotFound)
                 apt.visitors.remove(name)
             case Failure(x):
                 return Failure(x)
         return Success(None)
 
-    def add_visitor(self, number: int, name: str) -> Result[None, str]:
+    def add_visitor(self, number: int, name: str) -> Result[None, Error]:
         match self.get_apt(number):
             case Success(apt):
+                if name in apt.visitors:
+                    return Failure(Error.DuplicateVisitor)
                 apt.visitors.append(name)
             case Failure(x):
                 return Failure(x)
         return Success(None)
 
-    def remove_tenant(self, number: int, name: str) -> Result[None, str]:
+    def remove_tenant(self, number: int, name: str) -> Result[None, Error]:
         match self.get_apt(number):
             case Success(apt):
                 if name not in apt.tenants:
-                    return Failure(f"'{name}' is not a tenant of apartment '{number}'")
+                    return Failure(Error.TenantNotFound)
                 apt.tenants.remove(name)
             case Failure(x):
                 return Failure(x)
         return Success(None)
  
-    def add_tenant(self, number: int, name: str) -> Result[None, str]:
+    def add_tenant(self, number: int, name: str) -> Result[None, Error]:
         match self.get_apt(number):
             case Success(apt):
+                if name in apt.tenants:
+                    return Failure(Error.DuplicateTenant)
                 apt.tenants.append(name)
             case Failure(x):
                 return Failure(x)

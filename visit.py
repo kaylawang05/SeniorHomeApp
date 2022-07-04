@@ -1,41 +1,49 @@
-import datetime
+from dataclasses import dataclass
 import os
 
-from databases import ApartmentDatabase
+from returns.result import Result, Failure, Success
 
-# TODO: Cannot use csv format since people can put commas in their name, use json format instead
+from apartment import ApartmentDatabase
+from errors import Error
+from util import get_time, get_date
 
+@dataclass(unsafe_hash=True)
+class Visitor:
+    number: int
+    name: str
+
+# Emails daily logs to the senior home manager
+# Stores logs in JSON
 class VisitorManager:
-    def __init__(self, apt_database: ApartmentDatabase, log_dir):
-        self.apt_database = apt_database
-        self.log_dir = log_dir
-        self.signed_in = []
+    def __init__(self, apts: ApartmentDatabase, path: str):
+        self.apts = apts
+        self.path = path
+        self.visitors: dict[Visitor, str] = {}
 
-    def sign_in(self, apt, name):
-        sign_in_time = datetime.datetime.now().strftime("%H:%M")
+    def get_vistors(self) -> dict[Visitor, str]:
+        return self.visitors
 
-        self.apt_database.add_visitor(apt, name)
+    def sign_in(self, number: int, name: str) -> Result[None, Error]:
+        match self.apts.add_visitor(number, name):
+            case Success(_):
+                self.visitors[Visitor(number, name)] = get_time()
+                self.apts.save()
+            case Failure(Error.DuplicateVisitor):
+                self.visitors[Visitor(number, name)] = get_time()
+            case Failure(x):
+                return Failure(x)
+        return Success(None)
 
-        self.signed_in.append((apt, name, sign_in_time))
+    def sign_out(self, number: int, name: str) -> Result[None, Error]:
+        v = Visitor(number, name)
+        if v in self.visitors:
+            self.add_log(f"{number},{name},{self.visitors[v]},{get_time()}")
+            self.visitors.pop(v)
+            return Success(None)
+        else:
+            return Failure(Error.VisitorNotFound)
 
-        self.apt_database.save()
-
-    def sign_out(self, apt, name):
-        # format: apt,name,sign in time,sign out time
-
-        sign_out_time = datetime.datetime.now().strftime("%H:%M")
-
-        for a, n, t in self.signed_in:
-            if a == apt and n == name:
-                self.add_log(f"{apt},{name},{t},{sign_out_time}")
-                self.signed_in.remove((a,n,t))
-                return
-
-        print(f"error: {name} not found in room {apt}")
-        quit()
-
+    # could happen that the name has a comma in it and this breaks, but frontend will filter that :)
     def add_log(self, text):
-        date = datetime.date.today()
-
-        with open(os.path.join(self.log_dir, f"{date}.csv"), "a+") as f:
+        with open(os.path.join(self.path, f"{get_date()}.csv"), "a+") as f:
             f.write(text+"\n")

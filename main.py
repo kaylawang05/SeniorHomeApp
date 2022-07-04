@@ -1,7 +1,6 @@
-# TODO: Make robust logging + testing
-# TODO: Make actual good error system, for now it just quits on errors or exceptions
+from returns.result import Result, Failure, Success
 
-from databases import ApartmentDatabase
+from apartment import ApartmentDatabase, Error
 from visit import VisitorManager
 
 def main():
@@ -24,19 +23,37 @@ def main():
 
     print(database.remove_visitor(69, "bruh"))
 
+    print()
+
     print(database.get_apt(69))
 
     print()
 
     database.save()
 
+    results = database.query("10")
 
-    # results = database.query("10")
+    print(results)
 
-    # visitor_manager = VisitorManager(apt_database=database, log_dir="./visitor-logs/")
+    print()
 
-    # visitor_manager.sign_in(69, "david")
-    # visitor_manager.sign_out(69, "david")
+    visitor_manager = VisitorManager(database, "./visitor-logs/")
+
+    print(visitor_manager.sign_in(69, "bruh"))
+
+    print()
+
+    print(visitor_manager.visitors)
+
+    print()
+
+    print(visitor_manager.sign_out(69, "bruh"))
     
+    print()
+
+    print(visitor_manager.visitors)
+
+    print()
+
 if __name__ == "__main__":
     main()
