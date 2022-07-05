@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import json
+from typing import Tuple
 
 from fuzzywuzzy import process
 from returns.result import Result, Failure, Success
@@ -50,8 +51,8 @@ class ApartmentDatabase:
         with open(self.path, "w+") as f:
             f.write(json.dumps(self.rows, cls=ApartmentEncoder))
     
-    def query(self, query, limit=5) -> list[Apartment]:
-        return process.extract(str(query), self.rows, limit=limit)
+    def query(self, query, limit: int = -1) -> list[Tuple[Apartment, int]]:
+        return process.extract(str(query), self.rows, limit=len(self.rows) if limit == -1 else limit)
 
     def remove_visitor(self, number: int, name: str) -> Result[None, Error]:
         match self.get_apt(number):

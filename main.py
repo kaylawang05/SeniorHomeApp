@@ -14,7 +14,7 @@ def main():
 
     print()
 
-    results = database.query("da")
+    results = database.query("le")
 
     for result in results:
         print(result)
@@ -30,12 +30,6 @@ def main():
     print()
 
     database.save()
-
-    results = database.query("10")
-
-    print(results)
-
-    print()
 
     visitor_manager = VisitorManager(database, "./visitor-logs/")
 

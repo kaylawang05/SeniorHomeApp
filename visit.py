@@ -12,16 +12,14 @@ class Visitor:
     number: int
     name: str
 
-# Emails daily logs to the senior home manager
-# Stores logs in JSON
 class VisitorManager:
     def __init__(self, apts: ApartmentDatabase, path: str):
         self.apts = apts
         self.path = path
         self.visitors: dict[Visitor, str] = {}
 
-    def get_vistors(self) -> dict[Visitor, str]:
-        return self.visitors
+    def get_vistors(self) -> list[Visitor]:
+        return list(self.visitors.keys())
 
     def sign_in(self, number: int, name: str) -> Result[None, Error]:
         match self.apts.add_visitor(number, name):
