@@ -46,7 +46,14 @@ class ApartmentDatabase:
             return Failure(Error.ApartmentNotFound)
         rn = self.apt_to_row[number]
         return Success(self.rows[rn])
-            
+
+    def set_apt(self, apt: Apartment) -> Result[None, Error]:
+        if apt not in self.apt_to_row:
+            return Failure(Error.ApartmentNotFound)
+        rn = self.apt_to_row[apt.number]
+        self.rows[rn] = apt
+        return Success(None)
+
     def save(self):
         with open(self.path, "w+") as f:
             f.write(json.dumps(self.rows, cls=ApartmentEncoder))

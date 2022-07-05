@@ -41,6 +41,10 @@ def main():
 
     print()
 
+    print("==>", visitor_manager.is_visitor(69, "bruh"))
+
+    print()
+
     print(visitor_manager.sign_out(69, "bruh"))
     
     print()

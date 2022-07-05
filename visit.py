@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 import os
+from typing import Tuple
 
 from returns.result import Result, Failure, Success
 
@@ -7,36 +7,36 @@ from apartment import ApartmentDatabase
 from errors import Error
 from util import get_time, get_date
 
-@dataclass(unsafe_hash=True)
-class Visitor:
-    number: int
-    name: str
-
 class VisitorManager:
     def __init__(self, apts: ApartmentDatabase, path: str):
         self.apts = apts
         self.path = path
-        self.visitors: dict[Visitor, str] = {}
+        self.visitors: dict[Tuple[int, str], str] = {}
 
-    def get_vistors(self) -> list[Visitor]:
+    def add_visitor(self, number: int, name: str):
+        self.visitors[(number, name)] = get_time()
+
+    def get_vistors(self) -> list[Tuple[int, str]]:
         return list(self.visitors.keys())
+
+    def is_visitor(self, number: int, name: str) -> bool:
+        return (number, name) in self.visitors
 
     def sign_in(self, number: int, name: str) -> Result[None, Error]:
         match self.apts.add_visitor(number, name):
             case Success(_):
-                self.visitors[Visitor(number, name)] = get_time()
+                self.add_visitor(number, name)
                 self.apts.save()
             case Failure(Error.DuplicateVisitor):
-                self.visitors[Visitor(number, name)] = get_time()
+                self.add_visitor(number, name)
             case Failure(x):
                 return Failure(x)
         return Success(None)
 
     def sign_out(self, number: int, name: str) -> Result[None, Error]:
-        v = Visitor(number, name)
-        if v in self.visitors:
-            self.add_log(f"{number},{name},{self.visitors[v]},{get_time()}")
-            self.visitors.pop(v)
+        if (number, name) in self.visitors:
+            self.add_log(f"{number},{name},{self.visitors[(number, name)]},{get_time()}")
+            self.visitors.pop((number, name))
             return Success(None)
         else:
             return Failure(Error.VisitorNotFound)
