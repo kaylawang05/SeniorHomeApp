@@ -35,6 +35,8 @@ def main():
 
     print(visitor_manager.sign_in(69, "bruh"))
 
+    print(visitor_manager.sign_in(69, "bruh"))
+
     print()
 
     print(visitor_manager.visitors)

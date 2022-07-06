@@ -28,7 +28,7 @@ class VisitorManager:
             case Success(_):
                 self.add_visitor(number, name)
                 self.apts.save()
-            case Failure(errors.DuplicateVisitor):
+            case Failure(errors.DuplicateVisitor()):
                 self.add_visitor(number, name)
             case Failure(x):
                 return Failure(x)
