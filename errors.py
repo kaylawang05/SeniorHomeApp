@@ -1,8 +1,7 @@
-from enum import Enum
+class Error(Exception): pass
 
-class Error(Enum):
-    ApartmentNotFound = 0
-    VisitorNotFound = 1
-    DuplicateVisitor = 2
-    TenantNotFound = 3
-    DuplicateTenant = 4
+class ApartmentNotFound(Error): pass
+class VisitorNotFound(Error): pass
+class DuplicateVisitor(Error): pass
+class TenantNotFound(Error): pass
+class DuplicateTenant(Error): pass

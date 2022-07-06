@@ -4,6 +4,7 @@ from typing import Tuple
 from returns.result import Result, Failure, Success
 
 from apartment import ApartmentDatabase
+import errors
 from errors import Error
 from util import get_time, get_date
 
@@ -27,7 +28,7 @@ class VisitorManager:
             case Success(_):
                 self.add_visitor(number, name)
                 self.apts.save()
-            case Failure(Error.DuplicateVisitor):
+            case Failure(errors.DuplicateVisitor):
                 self.add_visitor(number, name)
             case Failure(x):
                 return Failure(x)
@@ -39,7 +40,7 @@ class VisitorManager:
             self.visitors.pop((number, name))
             return Success(None)
         else:
-            return Failure(Error.VisitorNotFound)
+            return Failure(errors.VisitorNotFound(f"Could not find and sign-out visitor '{name}'"))
 
     # could happen that the name has a comma in it and this breaks, but frontend will filter that :)
     def add_log(self, text):

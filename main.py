@@ -1,6 +1,6 @@
 from returns.result import Result, Failure, Success
 
-from apartment import ApartmentDatabase, Error
+from apartment import ApartmentDatabase
 from visit import VisitorManager
 
 def main():

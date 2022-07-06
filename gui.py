@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import * # type: ignore
 from returns.result import Result, Failure, Success
 
 from apartment import ApartmentDatabase, Error
