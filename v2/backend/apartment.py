@@ -5,8 +5,7 @@ from typing import Tuple
 from fuzzywuzzy import process
 from returns.result import Result, Failure, Success
 
-import errors
-from errors import Error
+from backend.errors import *
 
 @dataclass
 class Apartment:
@@ -44,13 +43,13 @@ class ApartmentDatabase:
 
     def get_apt(self, number: int) -> Result[Apartment, Error]:
         if number not in self.apt_to_row:
-            return Failure(errors.ApartmentNotFound(f"Could not find apartment '{number}' in database of known apartments."))
+            return Failure(ApartmentNotFound(f"Could not find apartment '{number}' in database of known apartments."))
         rn = self.apt_to_row[number]
         return Success(self.rows[rn])
 
     def set_apt(self, apt: Apartment) -> Result[None, Error]:
         if apt.number not in self.apt_to_row:
-            return Failure(errors.ApartmentNotFound(f"Could not find apartment '{apt.number}' in database of known apartments."))
+            return Failure(ApartmentNotFound(f"Could not find apartment '{apt.number}' in database of known apartments."))
         rn = self.apt_to_row[apt.number]
         self.rows[rn] = apt
         return Success(None)
@@ -66,7 +65,7 @@ class ApartmentDatabase:
         match self.get_apt(number):
             case Success(apt):
                 if name not in apt.visitors:
-                    return Failure(errors.VisitorNotFound(f"Could not remove visitor '{name}' because he/she was not found in apartment '{number}'."))
+                    return Failure(VisitorNotFound(f"Could not remove visitor '{name}' because he/she was not found in apartment '{number}'."))
                 apt.visitors.remove(name)
             case Failure(x):
                 return Failure(x)
@@ -76,7 +75,7 @@ class ApartmentDatabase:
         match self.get_apt(number):
             case Success(apt):
                 if name in apt.visitors:
-                    return Failure(errors.DuplicateVisitor(f"Could not add visitor '{name}' to apartment '{number}' because another visitor has the same name."))
+                    return Failure(DuplicateVisitor(f"Could not add visitor '{name}' to apartment '{number}' because another visitor has the same name."))
                 apt.visitors.append(name)
             case Failure(x):
                 return Failure(x)
@@ -86,7 +85,7 @@ class ApartmentDatabase:
         match self.get_apt(number):
             case Success(apt):
                 if name not in apt.tenants:
-                    return Failure(errors.TenantNotFound(f"Could not remove tenant '{name}' because he/she was not found in apartment '{number}'."))
+                    return Failure(TenantNotFound(f"Could not remove tenant '{name}' because he/she was not found in apartment '{number}'."))
                 apt.tenants.remove(name)
             case Failure(x):
                 return Failure(x)
@@ -96,7 +95,7 @@ class ApartmentDatabase:
         match self.get_apt(number):
             case Success(apt):
                 if name in apt.tenants:
-                    return Failure(errors.DuplicateTenant(f"Could not add tenant '{name}' to apartment '{number}' because another visitor has the same name."))
+                    return Failure(DuplicateTenant(f"Could not add tenant '{name}' to apartment '{number}' because another visitor has the same name."))
                 apt.tenants.append(name)
             case Failure(x):
                 return Failure(x)

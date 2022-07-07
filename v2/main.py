@@ -1,59 +1,15 @@
-from returns.result import Result, Failure, Success
-
-from apartment import ApartmentDatabase
-from visit import VisitorManager
+from backend import *
 
 def main():
-    database = ApartmentDatabase("./data/apt.json")
+    apts = ApartmentDatabase("./data/apt.json")
 
-    print(database.rows)
+    apt_102 = apts.get_apt(102).unwrap()
 
-    print()
+    print(apt_102.number)
 
-    print(database.get_apt(2))
+    print(apt_102)
 
-    print()
-
-    results = database.query("le")
-
-    for result in results:
-        print(result)
-
-    print()
-
-    print(database.remove_visitor(69, "bruh"))
-
-    print()
-
-    print(database.get_apt(69))
-
-    print()
-
-    database.save()
-
-    visitor_manager = VisitorManager(database, "./visitor-logs/")
-
-    print(visitor_manager.sign_in(69, "bruh"))
-
-    print(visitor_manager.sign_in(69, "bruh"))
-
-    print()
-
-    print(visitor_manager.visitors)
-
-    print()
-
-    print("==>", visitor_manager.is_visitor(69, "bruh"))
-
-    print()
-
-    print(visitor_manager.sign_out(69, "bruh"))
-    
-    print()
-
-    print(visitor_manager.visitors)
-
-    print()
+    apts.save()
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,8 @@
 from tkinter import * # type: ignore
 from returns.result import Result, Failure, Success
 
-from apartment import ApartmentDatabase, Error
-from visit import VisitorManager
+from backend.apartment import ApartmentDatabase, Error
+from backend.visit import VisitorManager
 
 def main():
     apts = ApartmentDatabase("./data/apt.json")
