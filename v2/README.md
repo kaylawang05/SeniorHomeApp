@@ -32,7 +32,6 @@ match safe_div(12,6):
 
 Here is an example of using the API
 ```python
-
 from returns.result import Result, Failure, Success # Failure and Success are different variants for Result
 
 from apartment import Apartment, ApartmentDatabase

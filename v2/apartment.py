@@ -49,7 +49,7 @@ class ApartmentDatabase:
         return Success(self.rows[rn])
 
     def set_apt(self, apt: Apartment) -> Result[None, Error]:
-        if apt not in self.apt_to_row:
+        if apt.number not in self.apt_to_row:
             return Failure(errors.ApartmentNotFound(f"Could not find apartment '{apt.number}' in database of known apartments."))
         rn = self.apt_to_row[apt.number]
         self.rows[rn] = apt
