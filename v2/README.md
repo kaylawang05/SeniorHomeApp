@@ -1,5 +1,9 @@
 # Senior Home App
 
+## How to run
+
+Run `pip install -r requirements.txt` and then to run the code, run `python3 main.py`
+
 ## Some Notes
 `apartment.py` contains the `Apartment` class which represents an apartment in the `ApartmentDatabase`. This database is saved and loaded from `apt.json`. You can add or set apartments to `ApartmentDatabase` and you can add or remove tenants or visitors. Something that could possibly return an error has the return type of `Result[type, Error]` where type represents the value returned by the function and Error represents a possible error that could be returned instead. `Error` as well as its subtypes are in `errors.py`. When using these functions, you can either call `.unwrap()` on them to unwrap the value from the `Result` container or crash if it is an `Error` instead. You can also use the `match` statement to handle the errors yourself. 
 
