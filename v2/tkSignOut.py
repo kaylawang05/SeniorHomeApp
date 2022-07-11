@@ -7,7 +7,7 @@ from backend import *
 
 root = Tk()
 root.title('Springfield Senior Home')
-root.geometry("500x700")
+root.geometry("600x800")
 
 # Takes in apt # and displays all visitors in that apt that are currently signed in
 def enter():
