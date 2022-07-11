@@ -25,6 +25,7 @@ def enter():
             for visitor in apt.visitors:
                 visitorList.insert(END, visitor)
         case Failure():
+            visitorList.delete(0, END)
             message.config(text="Please enter a valid apartment number.\nAsk help from the guard if necessary.")
 
 # Signs out the selected visitor if the visitor is signed in
