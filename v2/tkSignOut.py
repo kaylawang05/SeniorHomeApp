@@ -47,7 +47,7 @@ def help():
     message.config(text="To sign out, enter the apartment number of the visitor.\n \
 Click 'Enter'.\nYou will see a list of all the registered visitors who are currently signed in in the box above.\n \
 Click on the visitor that you want to sign out.\nClick 'Sign out'.\n \
-If you don't see your name, please register yourself as a visitor in the sign in page.")
+If you don't see your name, you are not currently signed in,\nor you need to register yourself as a visitor in the homepage.")
 
 # I don't know how to go back to the home page so I will make the app close for now
 def back():
