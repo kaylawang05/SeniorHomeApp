@@ -66,8 +66,8 @@ prompt.pack()
 aptNumber = Entry(root, width=10)
 aptNumber.pack()
 
-enter = Button(root, text="Enter", command=enter)
-enter.pack(pady=5)
+enterButton = Button(root, text="Enter", command=enter)
+enterButton.pack(pady=5)
 
 visitorList = Listbox(root)
 visitorList.pack(pady=10)
