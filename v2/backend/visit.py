@@ -1,11 +1,11 @@
 import os
 from typing import Tuple
 
-from returns.result import Result, Failure, Success
+from returns.result import Failure, Result, Success
 
 from backend.apartment import ApartmentDatabase
 from backend.errors import *
-from backend.util import get_time, get_date
+from backend.util import get_date, get_time
 
 class VisitorManager:
     def __init__(self, apts: ApartmentDatabase, path: str):
@@ -42,7 +42,6 @@ class VisitorManager:
         else:
             return Failure(VisitorNotFound(f"Could not find and sign-out visitor '{name}'"))
 
-    # could happen that the name has a comma in it and this breaks, but frontend will filter that :)
     def add_log(self, text):
         with open(os.path.join(self.path, f"{get_date()}.csv"), "a+") as f:
             f.write(text+"\n")

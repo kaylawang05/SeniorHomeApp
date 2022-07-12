@@ -1,5 +1,6 @@
-from tkinter import * # type: ignore
-from returns.result import Result, Failure, Success
+from tkinter import *  # type: ignore
+
+from returns.result import Failure, Result, Success
 
 from backend.apartment import ApartmentDatabase, Error
 from backend.visit import VisitorManager

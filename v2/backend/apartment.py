@@ -1,9 +1,9 @@
-from dataclasses import dataclass
 import json
+from dataclasses import dataclass
 from typing import Tuple
 
 from fuzzywuzzy import process
-from returns.result import Result, Failure, Success
+from returns.result import Failure, Result, Success
 
 from backend.errors import *
 
