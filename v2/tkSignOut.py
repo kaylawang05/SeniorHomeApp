@@ -57,8 +57,8 @@ def back():
 title = Label(root, text="Sign Out", font=("Helvetica", 20))
 title.pack(side=TOP, pady=5)
 
-apts = ApartmentDatabase("./data/apt.json")
-allVisitors = VisitorManager(apts, "./visitor-logs/")
+apts = ApartmentDatabase("./data/apts.json")
+allVisitors = VisitorManager(apts, "./data/visitors.json")
 
 prompt = Label(root, text="Enter apartment #:")
 prompt.pack()
