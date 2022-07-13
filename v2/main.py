@@ -1,7 +1,7 @@
 from backend import *
 
 def main():
-    apts = ApartmentManager("./database.json")
+    apts = ApartmentManager(db_path="./database.json", log_dir="./visitor-logs/")
 
     try:
         apt = apts.get_apt(102)

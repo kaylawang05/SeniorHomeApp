@@ -7,16 +7,17 @@ from backend.errors import *
 from backend.objects import *
 
 class ApartmentManager:
-    def __init__(self, path: str):
-        self.path = path
+    def __init__(self, db_path: str, log_dir: str):
+        self.db_path = db_path
+        self.log_dir = log_dir
 
-        with open(path, "r") as f:
+        with open(db_path, "r") as f:
             self.rows: list[Apartment] = json.load(f, cls=ApartmentDecoder)
         
         self.apt_to_row = {apt.number: i for i, apt in enumerate(self.rows)}
 
     def save(self):
-        with open(self.path, "w") as f:
+        with open(self.db_path, "w") as f:
             f.write(json.dumps(self.rows, cls=ApartmentEncoder))
 
     def get_apt(self, number: int) -> Apartment:
@@ -122,6 +123,12 @@ class ApartmentManager:
                 v.history[-1].end = datetime.datetime.now()
         
         self.save()
+    
+    def generate_visitor_log(self):
+        for apt in self.rows:
+            for v in apt.visitors:
+                for t in v.history:
+                    quit("unimplemented")
 
 def query_name(name: str, visitors: list[Visitor]) -> Visitor | None:
     for v in visitors:
