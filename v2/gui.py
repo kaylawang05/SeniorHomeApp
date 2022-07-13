@@ -1,12 +1,11 @@
-from tkinter import *  # type: ignore
+from tkinter import *
 
 from returns.result import Failure, Result, Success
 
-from backend.apartment import ApartmentDatabase, Error
-from backend.visit import VisitorManager
+from backend import *
 
 def main():
-    apts = ApartmentDatabase("./data/apt.json")
+    apts = Database("./database.json")
 
     root = Tk()
 

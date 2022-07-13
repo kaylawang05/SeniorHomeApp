@@ -1,15 +1,15 @@
 from backend import *
 
 def main():
-    apts = ApartmentDatabase("./data/apt.json")
+    apts = ApartmentManager("./database.json")
 
-    apt_102 = apts.get_apt(102).unwrap()
-
-    print(apt_102.number)
-
-    print(apt_102)
-
-    apts.save()
+    try:
+        apt = apts.get_apt(102)
+    except ApartmentNotFound:
+        print("oh no, apartment not found")
+    
+    apts.sign_in("Teresa Woods", 101)
+    apts.sign_out("Teresa Woods", 101)
 
 if __name__ == "__main__":
     main()
