@@ -1,6 +1,6 @@
-from backend.apartment import ApartmentManager
+from backend.apartment import (Apartment, ApartmentDatabase, ApartmentDecoder,
+                               ApartmentEncoder)
 from backend.errors import (ApartmentNotFound, DuplicateTenant,
                             DuplicateVisitor, Error, TenantNotFound,
                             VisitorNotFound, VisitorNotSignedIn)
-from backend.objects import (Apartment, ApartmentDecoder, ApartmentEncoder,
-                             TimeInterval, Visitor)
+from returns.result import Result, Success, Failure
