@@ -35,7 +35,7 @@ def enter():
 def signOut():
     number = int(aptNumber.get())
     name = visitorList.get(ANCHOR)
-    allVisitors.sign_out(number, name)
+    allVisitors.sign_out(name, number)
     if not visitorList.curselection():
         message.config(text="Please select a visitor to sign out.")
     else:
