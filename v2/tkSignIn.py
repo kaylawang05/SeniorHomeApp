@@ -35,7 +35,7 @@ def enter():
 def signIn():
     number = int(aptNumber.get())
     name = visitorList.get(ANCHOR)
-    allVisitors.sign_in(number, name)
+    allVisitors.sign_in(name, number)
     if not visitorList.curselection():
         message.config(text="Please select a visitor to sign in.")
     else:
@@ -57,7 +57,7 @@ def back():
 title = Label(root, text="Sign In", font=("Helvetica", 20))
 title.pack(side=TOP, pady=5)
 
-apts = ApartmentDatabase("./data/apt.json")
+apts = ApartmentDatabase("./data/apts.json")
 allVisitors = VisitorManager(apts, "./visitor-logs/")
 
 prompt = Label(root, text="Enter apartment #:")

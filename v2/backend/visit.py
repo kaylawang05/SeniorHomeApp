@@ -24,9 +24,11 @@ class VisitorManager:
             case Failure(x):
                 return Failure(x)
         
-        with open(os.path.join(self.path, f"{datetime.datetime.today()}.csv"), "a+") as f:
+        date = datetime.datetime.today().date()
+
+        with open(os.path.join(self.path, f"{date}.csv"), "a+") as f:
             if f.read() == "":
-                f.write("Apartment Number,Name,Sign In Time,Sign Out Time")
+                f.write("Apartment Number,Name,Sign In Time,Sign Out Time\n")
                 self.current_line = 0
             
             sign_in_time = datetime.datetime.now().strftime("%H:%M")
@@ -57,19 +59,14 @@ class VisitorManager:
             
             sign_out_time = datetime.datetime.now().strftime("%H:%M")
 
-            sign_in_time, line = self.visitors[(name, number)]
+            _, line = self.visitors[(name, number)]
 
             lines = f.readlines()
 
-            lines[line] += f",{sign_out_time}"
+            lines[line] = lines[line][:-1] + f",{sign_out_time}\n"
 
             f.write("".join(lines))
 
         del self.visitors[(name, number)]
-
-        return Success(None)
-
-
-
 
         return Success(None)

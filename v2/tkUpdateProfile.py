@@ -39,33 +39,33 @@ def enter():
 
 def addTenant():
     number = int(aptNumber.get())
-    apts.add_tenant(number, tenantEntry.get())
+    apts.add_tenant(tenantEntry.get(), number)
     displayTenants(number)
     tenantEntry.delete(0,END)
-    apts.save()
+    
 
 def deleteTenant():
     number = int(aptNumber.get())
     name = tenantList.get(ANCHOR)
-    apts.remove_tenant(number, name)
+    apts.remove_tenant(name, number)
     displayTenants(number)
-    apts.save()
+    
 
 
 def addVisitor():
     number = int(aptNumber.get())
-    apts.add_visitor(number, visitorEntry.get())
+    apts.add_visitor(visitorEntry.get(), number)
     displayVisitors(number)
     visitorEntry.delete(0,END)
-    apts.save()
+    
 
 
 def deleteVisitor():
     number = int(aptNumber.get())
     name = visitorList.get(ANCHOR)
-    apts.remove_visitor(number, name)
+    apts.remove_visitor(name, number)
     displayVisitors(number)
-    apts.save()
+    
 
 # Help message that appears when help button is clicked
 def help():
@@ -82,7 +82,7 @@ def back():
 title = Label(root, text="Update Profile", font=("Helvetica", 20))
 title.pack(side=TOP, pady=5)
 
-apts = ApartmentDatabase("./data/apt.json")
+apts = ApartmentDatabase("./data/apts.json")
 allVisitors = VisitorManager(apts, "./visitor-logs/")
 
 prompt = Label(root, text="Enter apartment #:")
