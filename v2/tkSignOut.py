@@ -22,7 +22,7 @@ def enter():
             else:
                 hasVisitors = False
                 for visitor in apt.visitors:
-                    if (number, visitor) in allVisitors.visitors:
+                    if (visitor, number) in allVisitors.visitors:
                         visitorList.insert(END, visitor)
                         hasVisitors = True
                 if(hasVisitors == False):
@@ -58,7 +58,7 @@ title = Label(root, text="Sign Out", font=("Helvetica", 20))
 title.pack(side=TOP, pady=5)
 
 apts = ApartmentDatabase("./data/apts.json")
-allVisitors = VisitorManager(apts, "./data/visitors.json")
+allVisitors = VisitorManager(apts, "./visitor-logs/")
 
 prompt = Label(root, text="Enter apartment #:")
 prompt.pack()

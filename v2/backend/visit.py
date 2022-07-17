@@ -1,16 +1,32 @@
-import datetime
+import csv
 import os
-from backend.errors import *
+from datetime import datetime
+from tkinter import W
+
 from backend.apartment import *
+from backend.errors import *
 
 class VisitorManager:
     def __init__(self, apts: ApartmentDatabase, path: str):
         self.apts = apts
         self.path = path
-        # map of (name, number) -> (line number, sign in time)
+
         self.visitors: dict[Tuple[str, int], Tuple[str, int]] = {}
         self.current_line = 0
-    
+
+        if self.log_exists():
+            with open(self.file_path, "r") as f:
+                csvreader = csv.reader(f)
+                head = next(csvreader)
+                for (number, name, sign_in_time, sign_out_time) in csv.reader(f):
+                    if sign_out_time == "":
+                        self.visitors[(name, int(number))] = (sign_in_time, self.current_line)
+                    self.current_line += 1
+
+    def log_exists(self) -> bool:
+        self.file_path = os.path.join(self.path, f"{date_today()}.csv")
+        return os.path.exists(self.file_path)
+
     def sign_in(self, name: str, number: int) -> Result[None, ApartmentNotFound | DuplicateVisitor | VisitorAlreadySignedIn]:
         if (name, number) in self.visitors:
             return Failure(VisitorAlreadySignedIn(f"Cannot sign in visitor '{name}' because he/she is already signed in to apartment '{number}'"))
@@ -24,22 +40,20 @@ class VisitorManager:
             case Failure(x):
                 return Failure(x)
         
-        date = datetime.datetime.today().date()
+        if not self.log_exists():
+            with open(self.file_path, "x+") as f:
+                if f.read() == "":
+                    self.current_line = 0
+                    f.write("Apartment Number,Name,Sign In Time,Sign Out Time\n")
 
-        with open(os.path.join(self.path, f"{date}.csv"), "a+") as f:
-            if f.read() == "":
-                f.write("Apartment Number,Name,Sign In Time,Sign Out Time\n")
-                self.current_line = 0
-            
-            sign_in_time = datetime.datetime.now().strftime("%H:%M")
-
+        with open(self.file_path, "a") as f:
+            sign_in_time = time_now()
             self.visitors[(name, number)] = (sign_in_time, self.current_line)
+            f.write(f"{number},{name},{sign_in_time},\n")
             self.current_line += 1
 
-            f.write(f"{number},{name},{sign_in_time}")
+        return Success(None)        
 
-        return Success(None)
-    
     def sign_out(self, name: str, number: int) -> Result[None, ApartmentNotFound | VisitorNotFound | VisitorNotSignedIn]:
         match self.apts.get_visitors(number):
             case Success(visitors):
@@ -51,22 +65,20 @@ class VisitorManager:
         if (name, number) not in self.visitors:
             return Failure(VisitorNotSignedIn(f"Could not sign out visitor '{name}' because he/she is not signed in to apartment '{number}'"))
 
-        # right now doesn't handle the edge case of signing in on one day and signing out the other day, but that is fine for now
-        with open(os.path.join(self.path, f"{datetime.datetime.today()}.csv"), "w+") as f:
-            if f.read() == "":
-                f.write("Apartment Number,Name,Sign In Time,Sign Out Time")
-                self.current_line = 0
-            
-            sign_out_time = datetime.datetime.now().strftime("%H:%M")
+        sign_in_time, line_number = self.visitors[(name, number)]
 
-            _, line = self.visitors[(name, number)]
-
+        lines = []
+        with open(self.file_path, "r") as f:
             lines = f.readlines()
-
-            lines[line] = lines[line][:-1] + f",{sign_out_time}\n"
-
+        
+        with open(self.file_path, "w") as f:
+            lines[line_number+1] = lines[line_number+1][:-1] + time_now()+"\n"
             f.write("".join(lines))
 
-        del self.visitors[(name, number)]
-
         return Success(None)
+
+def time_now() -> str:
+    return datetime.now().strftime("%H:%M")
+
+def date_today() -> str:
+    return str(datetime.today().date())
