@@ -1,7 +1,10 @@
 # Senior Home App
 
-## How to run
+## Pre-requisites
+- You need to be on Python 3.10 or above
+- Install fuzzywuzzy module by running `pip3 install fuzzywuzzy`
 
+## How to run
 Run `pip install -r requirements.txt` and then to run the code, run `python3 main.py`
 
 ## Some Notes
