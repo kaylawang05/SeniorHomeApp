@@ -22,7 +22,7 @@ def enter():
             else:
                 hasVisitors = True
                 for visitor in apt.visitors:
-                    if (number, visitor) not in allVisitors.visitors:
+                    if (visitor, number) not in allVisitors.visitors:
                         visitorList.insert(END, visitor)
                         hasVisitors = False
                 if(hasVisitors):

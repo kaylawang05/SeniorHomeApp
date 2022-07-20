@@ -91,8 +91,8 @@ prompt.pack()
 aptNumber = Entry(root, width=10)
 aptNumber.pack()
 
-enter = Button(root, text="Enter", command=enter)
-enter.pack(pady=5)
+enter_btn = Button(root, text="Enter", command=enter)
+enter_btn.pack(pady=5)
 
 #create a frame with the labels side by side
 labelFrame = Frame(root, width=500, height=10)
