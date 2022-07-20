@@ -2,10 +2,10 @@
 
 ## Pre-requisites
 - You need to be on Python 3.10 or above
-- Install fuzzywuzzy module by running `pip3 install fuzzywuzzy`
+- Install the dependencies by running `pip install -r requirements.txt`
 
 ## How to run
-Run `pip install -r requirements.txt` and then to run the code, run `python3 main.py`
+Type `python3 <workflow>.py` where `<workflow>` is the workflow you want to run. 
 
 ## Some Notes
 `apartment.py` contains the `Apartment` class which represents an apartment in the `ApartmentDatabase`. This database is saved and loaded from `apt.json`. You can add or set apartments to `ApartmentDatabase` and you can add or remove tenants or visitors. Something that could possibly return an error has the return type of `Result[type, Error]` where type represents the value returned by the function and Error represents a possible error that could be returned instead. `Error` as well as its subtypes are in `errors.py`. When using these functions, you can either call `.unwrap()` on them to unwrap the value from the `Result` container or crash if it is an `Error` instead. You can also use the `match` statement to handle the errors yourself. 
