@@ -1,4 +1,3 @@
-import datetime
 import json
 import random
 
@@ -13,7 +12,7 @@ def main():
         apts = []
         
         for i in range(101, 350):
-            tenants = [fake.name() for _ in range(random.randint(0, 10))]
+            tenants = [fake.name() for _ in range(random.randint(0, 2))]
             visitors = [fake.name() for _ in range(random.randint(0, 10))] if len(tenants) != 0 else []
             
             apt = Apartment(

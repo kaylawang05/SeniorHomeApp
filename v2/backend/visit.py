@@ -1,7 +1,6 @@
 import csv
 import os
 from datetime import datetime
-from tkinter import W
 
 from backend.apartment import *
 from backend.errors import *
@@ -74,6 +73,8 @@ class VisitorManager:
         with open(self.file_path, "w") as f:
             lines[line_number+1] = lines[line_number+1][:-1] + time_now()+"\n"
             f.write("".join(lines))
+        
+        del self.visitors[(name, number)]
 
         return Success(None)
 

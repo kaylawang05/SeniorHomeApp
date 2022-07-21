@@ -1,6 +1,5 @@
 import json
 from dataclasses import dataclass
-import pathlib
 from typing import Tuple
 
 from fuzzywuzzy import process
