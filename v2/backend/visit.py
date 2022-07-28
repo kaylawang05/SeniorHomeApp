@@ -5,6 +5,7 @@ from datetime import datetime
 from backend.apartment import *
 from backend.errors import *
 
+
 class VisitorManager:
     def __init__(self, apts: ApartmentDatabase, path: str):
         self.apts = apts
@@ -19,7 +20,8 @@ class VisitorManager:
                 head = next(csvreader)
                 for (number, name, sign_in_time, sign_out_time) in csv.reader(f):
                     if sign_out_time == "":
-                        self.visitors[(name, int(number))] = (sign_in_time, self.current_line)
+                        self.visitors[(name, int(number))] = (
+                            sign_in_time, self.current_line)
                     self.current_line += 1
 
     def log_exists(self) -> bool:
@@ -38,7 +40,7 @@ class VisitorManager:
                             return Failure(x)
             case Failure(x):
                 return Failure(x)
-        
+
         if not self.log_exists():
             with open(self.file_path, "x+") as f:
                 if f.read() == "":
@@ -51,7 +53,7 @@ class VisitorManager:
             f.write(f"{number},{name},{sign_in_time},\n")
             self.current_line += 1
 
-        return Success(None)        
+        return Success(None)
 
     def sign_out(self, name: str, number: int) -> Result[None, ApartmentNotFound | VisitorNotFound | VisitorNotSignedIn]:
         match self.apts.get_visitors(number):
@@ -60,7 +62,7 @@ class VisitorManager:
                     return Failure(VisitorNotFound(f"Could not sign out visitor '{name}' because he/she is not a visitor of apartment '{number}'"))
             case Failure(x):
                 return Failure(x)
-        
+
         if (name, number) not in self.visitors:
             return Failure(VisitorNotSignedIn(f"Could not sign out visitor '{name}' because he/she is not signed in to apartment '{number}'"))
 
@@ -69,17 +71,19 @@ class VisitorManager:
         lines = []
         with open(self.file_path, "r") as f:
             lines = f.readlines()
-        
+
         with open(self.file_path, "w") as f:
             lines[line_number+1] = lines[line_number+1][:-1] + time_now()+"\n"
             f.write("".join(lines))
-        
+
         del self.visitors[(name, number)]
 
         return Success(None)
 
+
 def time_now() -> str:
     return datetime.now().strftime("%H:%M")
+
 
 def date_today() -> str:
     return str(datetime.today().date())
