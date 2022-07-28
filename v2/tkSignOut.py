@@ -10,6 +10,8 @@ root.title('Springfield Senior Home')
 root.geometry("600x800")
 
 # Takes in apt # and displays all visitors in that apt that are currently signed in
+
+
 def enter():
     message.config(text="")
     number = int(aptNumber.get())
@@ -18,7 +20,8 @@ def enter():
             visitorList.delete(0, END)
             apt = apts.get_apt(number).unwrap()
             if not apt.visitors:
-                message.config(text="There are no registered visitors for this apartment.")
+                message.config(
+                    text="There are no registered visitors for this apartment.")
             else:
                 hasVisitors = False
                 for visitor in apt.visitors:
@@ -26,12 +29,16 @@ def enter():
                         visitorList.insert(END, visitor)
                         hasVisitors = True
                 if(hasVisitors == False):
-                    message.config(text="There are no visitors currently signed in for this apartment.")
+                    message.config(
+                        text="There are no visitors currently signed in for this apartment.")
         case Failure():
             visitorList.delete(0, END)
-            message.config(text="Please enter a valid apartment number.\nAsk help from the guard if necessary.")
+            message.config(
+                text="Please enter a valid apartment number.\nAsk help from the guard if necessary.")
 
 # Signs out the selected visitor
+
+
 def signOut():
     number = int(aptNumber.get())
     name = visitorList.get(ANCHOR)
@@ -43,6 +50,8 @@ def signOut():
         visitorList.delete(ANCHOR)
 
 # Help message that appears when help button is clicked
+
+
 def help():
     message.config(text="To sign out, enter the apartment number of the visitor.\n \
 Click 'Enter'.\nYou will see a list of all the registered visitors who are currently signed in in the box above.\n \
@@ -50,8 +59,11 @@ Click on the visitor that you want to sign out.\nClick 'Sign out'.\n \
 If you don't see your name, you are not currently signed in,\nor you need to register yourself as a visitor in the homepage.")
 
 # I don't know how to go back to the home page so I will make the app close for now
+
+
 def back():
     root.destroy()
+
 
 # Code for how the app appears
 title = Label(root, text="Sign Out", font=("Helvetica", 20))

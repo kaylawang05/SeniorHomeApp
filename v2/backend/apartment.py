@@ -7,11 +7,13 @@ from returns.result import Failure, Result, Success
 
 from backend.errors import *
 
+
 @dataclass
 class Apartment:
     number: int
     tenants: list[str]
     visitors: list[str]
+
 
 class ApartmentEncoder(json.JSONEncoder):
     def default(self, o) -> dict | str:
@@ -23,18 +25,21 @@ class ApartmentEncoder(json.JSONEncoder):
             }
         return json.JSONEncoder.default(self, o)
 
+
 class ApartmentDecoder(json.JSONDecoder):
     def __init__(self, *args, **kwargs):
-        json.JSONDecoder.__init__(self, object_hook=self.object_hook, *args, **kwargs)
-    
+        json.JSONDecoder.__init__(
+            self, object_hook=self.object_hook, *args, **kwargs)
+
     def object_hook(self, dct: dict) -> Apartment | dict:
         if "tenants" in dct:
             return Apartment(
-                number = dct["number"],
-                tenants = dct["tenants"],
-                visitors = dct["visitors"],
+                number=dct["number"],
+                tenants=dct["tenants"],
+                visitors=dct["visitors"],
             )
         return dct
+
 
 class ApartmentDatabase:
     def __init__(self, path: str):
@@ -42,7 +47,7 @@ class ApartmentDatabase:
 
         with open(path, "r") as f:
             self.rows: list[Apartment] = json.load(f, cls=ApartmentDecoder)
-            
+
         self.apt_to_row = {apt.number: i for i, apt in enumerate(self.rows)}
 
     def save(self):
@@ -56,7 +61,7 @@ class ApartmentDatabase:
         if number not in self.apt_to_row:
             return Failure(ApartmentNotFound(f"Could not find apartment '{number}' in database of known apartments."))
         return Success(self.rows[self.apt_to_row[number]])
-    
+
     def get_numbers(self) -> list[int]:
         return list(self.apt_to_row.keys())
 
@@ -64,12 +69,12 @@ class ApartmentDatabase:
         if number not in self.apt_to_row:
             return Failure(ApartmentNotFound(f"Could not find apartment '{number}' in database of known apartments."))
         return Success(self.rows[self.apt_to_row[number]].tenants)
-    
+
     def get_visitors(self, number: int) -> Result[list[str], ApartmentNotFound]:
         if number not in self.apt_to_row:
             return Failure(ApartmentNotFound(f"Could not find apartment '{number}' in database of known apartments."))
         return Success(self.rows[self.apt_to_row[number]].visitors)
-    
+
     def query(self, query, limit: int = -1) -> list[Tuple[Apartment, int]]:
         return process.extract(str(query), self.rows, limit=len(self.rows) if limit == -1 else limit)
 
@@ -83,7 +88,7 @@ class ApartmentDatabase:
             case Failure(x):
                 return Failure(x)
         return Success(None)
-    
+
     def remove_tenant(self, name: str, number: int) -> Result[None, TenantNotFound | ApartmentNotFound]:
         match self.get_tenants(number):
             case Success(tenants):
@@ -94,7 +99,7 @@ class ApartmentDatabase:
             case Failure(x):
                 return Failure(x)
         return Success(None)
-    
+
     def add_visitor(self, name: str, number: int) -> Result[None, DuplicateVisitor | ApartmentNotFound]:
         match self.get_visitors(number):
             case Success(visitors):
@@ -103,9 +108,9 @@ class ApartmentDatabase:
                 visitors.append(name)
                 self.save()
             case Failure(x):
-                return Failure(x)        
+                return Failure(x)
         return Success(None)
-        
+
     def remove_visitor(self, name: str, number: int) -> Result[None, VisitorNotFound | ApartmentNotFound]:
         match self.get_visitors(number):
             case Success(visitors):
@@ -115,4 +120,4 @@ class ApartmentDatabase:
                 self.save()
             case Failure(x):
                 return Failure(x)
-        return Success(None) 
+        return Success(None)
