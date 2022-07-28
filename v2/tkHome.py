@@ -14,12 +14,12 @@ root.title("Springfield Senior Center Homepage")
 root.eval("tk::PlaceWindow . center")
 
 # creating a frame widget
-frame1 = tk.Frame(root, width=500, height=600, bg=bg_color)
+frame1 = tk.Frame(root, width=1310, height=980, bg=bg_color)
 frame1.grid(row=0, column=0)
 frame1.pack_propagate(False)
 
 # frame1 widgets
-logo_img = ImageTk.PhotoImage(file="./images/SeniorCenterImage.png")
+logo_img = ImageTk.PhotoImage(file="./images/frontentrance.jpeg")
 logo_widget = tk.Label(frame1, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
 logo_widget.pack()  # pack method
