@@ -2,6 +2,7 @@
 # 1. Figuring out how to code the back button to go to a different page
 # 2. Formatting
 
+import os
 from tkinter import *
 from backend import *
 
@@ -63,6 +64,7 @@ If you don't see your name, you are not currently signed in,\nor you need to reg
 
 def back():
     root.destroy()
+    os.system("python3 tkHome.py")
 
 
 # Code for how the app appears

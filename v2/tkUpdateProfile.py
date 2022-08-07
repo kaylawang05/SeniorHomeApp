@@ -1,3 +1,4 @@
+import os
 from tkinter import *
 from backend import *
 import json
@@ -85,6 +86,7 @@ To delete a tenant or visitor, click on the name. \n Click 'Delete'\n")
 
 def back():
     root.destroy()
+    os.system("python3 tkHome.py")
 
 
 # Code for how the app appears
