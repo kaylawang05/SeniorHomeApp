@@ -85,8 +85,8 @@ To delete a tenant or visitor, click on the name. \n Click 'Delete'\n")
 
 
 def back():
-    root.destroy()
     os.system("python3 tkHome.py")
+    quit()
 
 
 # Code for how the app appears

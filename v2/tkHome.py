@@ -8,19 +8,19 @@ bg_color = "#cd661d"
 
 
 def openSignIn():
-    root.destroy()
     os.system('python3 tkSignIn.py')  # calls the tkSignIn.py python script
+    quit()
 
 
 def openSignOut():
-    root.destroy()
     os.system('python3 tkSignOut.py')  # calls the tkSignOut.py python script
+    quit()
 
 
 def openUpdateProfile():
-    root.destroy()
     # calls the tkUpdateProfile.py python script
     os.system('python3 tkUpdateProfile.py')
+    quit()
 
 
 # initialize app
