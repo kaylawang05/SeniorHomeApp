@@ -63,8 +63,8 @@ If you don't see your name, you are currently signed in,\nor you need to registe
 
 
 def back():
+    root.destroy()
     os.system("python3 tkHome.py")
-    quit()
 
 
 # Code for how the app appears
