@@ -90,7 +90,7 @@ logButton = tk.Button(homeFrame, text=" SEND LOG INFO ",
 logo_img = ImageTk.PhotoImage(file="./images/frontentrance.jpeg")
 logo_widget = tk.Label(homeFrame, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
-logo_widget.place(x=27.5, y=265)
+logo_widget.pack(side="bottom", pady = 100)
 
 # run app // displays window until EXIT
 root.mainloop()

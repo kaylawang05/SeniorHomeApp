@@ -4,8 +4,12 @@ from email.message import EmailMessage
 from tkinter import *
 
 root = Tk()
+root.title('Springfield Senior Home')
+root.eval("tk::PlaceWindow . center")
+root.configure(bg="#fae5ac")
 
-e = Entry(root, width = 50, borderwidth = 4)
+e = Entry(root, width = 50, highlightthickness=1)
+e.configure(bg = "white", fg = "black")
 e.pack()
 email = ""
 def click():
@@ -13,8 +17,8 @@ def click():
     myLabel = Label(root, text = "email sent")
     myLabel.pack()
     #Email stuff
-    # date = datetime.date.today()
-    date = "2022-07-14"
+    date = datetime.date.today()
+    #date = "2022-07-14"
     msg = EmailMessage()
     msg['Subject'] = 'Log delivery for '+ date
     msg['From'] = 'seniorhomespringfield@hotmail.com'
@@ -38,6 +42,7 @@ def click():
     server.quit()
 
 myButton = Button(root, text = "Send", command=click)
+myButton.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 myButton.pack()
 
 root.mainloop()

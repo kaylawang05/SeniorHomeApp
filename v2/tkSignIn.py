@@ -104,7 +104,7 @@ message.pack(pady=5)
 # changing color of widgets
 for widget in root.winfo_children():
     widget.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
-aptNumber.configure(bg="white")
+aptNumber.configure(bg="white", highlightthickness=1)
 visitorList.configure(bg="white")
 
 root.mainloop()

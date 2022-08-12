@@ -85,11 +85,21 @@ To delete a tenant or visitor, click on the name. \n Click 'Delete'\n")
 
 # I don't know how to go back to the home page so I will make the app close for now
 
-
 def back():
     root.destroy()
     os.system("python3 tkHome.py")
 
+def tenant_temp_text_disappear(arg):
+    tenantEntry.delete(0, "end")
+
+def visitor_temp_text_disappear(arg):
+    visitorEntry.delete(0,"end")
+
+def tenant_temp_text_appear(arg):
+    tenantEntry.insert(0, "Enter tenant name here to add")
+
+def visitor_temp_text_appear(arg):
+    visitorEntry.insert(0, "Enter visitor name here to add")
 
 # Code for how the app appears
 title = Label(root, text="Update Profile", font=("Helvetica", 20))
@@ -144,12 +154,17 @@ entryFrame.pack()
 
 tenantEntry = Entry(entryFrame)
 tenantEntry.configure(bg="white", highlightthickness=1, fg="black")
+tenantEntry.insert(0, "Enter tenant name here to add")
 tenantEntry.pack(side=LEFT, pady=10, padx=10)
+tenantEntry.bind("<FocusIn>", tenant_temp_text_disappear)
+tenantEntry.bind("<FocusOut>", tenant_temp_text_appear)
 
 visitorEntry = Entry(entryFrame)
 visitorEntry.configure(bg="white", highlightthickness=1, fg="black")
+visitorEntry.insert(0, "Enter visitor name here to add")
 visitorEntry.pack(side=RIGHT, pady=10, padx=10)
-
+visitorEntry.bind("<FocusIn>", visitor_temp_text_disappear)
+visitorEntry.bind("<FocusOut>", visitor_temp_text_appear)
 
 # create a frame with the add and delete buttons
 buttonFrame = Frame(root, width=500, height=50)
