@@ -4,23 +4,26 @@ import os
 from tkinter import *
 from PIL import ImageTk
 
-bg_color = "#cd661d"
+bg_color = "#FAE5AC"
+button_color = "#cd661d"
 
 
 def openSignIn():
-    root.destroy()
     os.system('python3 tkSignIn.py')  # calls the tkSignIn.py python script
 
 
 def openSignOut():
-    root.destroy()
     os.system('python3 tkSignOut.py')  # calls the tkSignOut.py python script
 
 
 def openUpdateProfile():
-    root.destroy()
     # calls the tkUpdateProfile.py python script
     os.system('python3 tkUpdateProfile.py')
+
+
+def openLog():
+    # calls the tkVisitorLog.py python script
+    os.system('python3 tkVisitorLog.py')
 
 
 # initialize app
@@ -29,54 +32,65 @@ root.title("Springfield Senior Center Homepage")
 root.eval("tk::PlaceWindow . center")
 
 # creating a frame widget
-homeFrame = tk.Frame(root, width=1310, height=980, bg=bg_color)
+homeFrame = tk.Frame(root, highlightbackground="#cd661d",
+                     highlightthickness=5, width=1000, height=1000, bg=bg_color)
 homeFrame.grid(row=0, column=0)
 homeFrame.pack_propagate(False)
 
+# label widget
+title = tk.Label(homeFrame, text="Welcome to the Springfield Senior Center Page!",
+                 bg=bg_color,
+                 fg="#5F5F9E",
+                 font=("TkMenuFont", 30, 'bold')
+                 ).pack(pady=1)
+
+# button widgets
+sInButton = tk.Button(homeFrame, text="  SIGN-IN  ",
+                      font=("TkHeadingFont", 28),
+                      bg=button_color,
+                      fg="white",
+                      cursor="hand2",
+                      activebackground="#FFFF7F",
+                      activeforeground="black",
+                      command=openSignIn
+                      ).place(x=275, y=100)
+
+sOutButton = tk.Button(homeFrame, text="SIGN-OUT",
+                       font=("TkHeadingFont", 28),
+                       bg=button_color,
+                       fg="white",
+                       cursor="hand2",
+                       activebackground="#FFFF7F",
+                       activeforeground="black",
+                       command=openSignOut
+                       ).place(x=500, y=100)
+
+updtButton = tk.Button(homeFrame, text="UPDATE PROFILE",
+                       font=("TkHeadingFont", 14),
+                       bg=button_color,
+                       fg="white",
+                       cursor="hand2",
+                       activebackground="#FFFF7F",
+                       activeforeground="black",
+                       command=openUpdateProfile
+                       ).place(x=302, y=200)
+
+logButton = tk.Button(homeFrame, text=" SEND LOG INFO ",
+                      font=("TkHeadingFont", 14),
+                      bg=button_color,
+                      fg="white",
+                      cursor="hand2",
+                      activebackground="#FFFF7F",
+                      activeforeground="black",
+                      command=openLog
+                      ).place(x=500, y=200)
+
 # homeFrame widgets
-logo_img = ImageTk.PhotoImage(
-    file="./images/frontentrance.jpeg")  # homepage image
+# IMAGE DIMENSIONS NEED TO BE 930x432
+logo_img = ImageTk.PhotoImage(file="./images/frontentrance.jpeg")
 logo_widget = tk.Label(homeFrame, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
-logo_widget.pack()  # pack method
-
-# label widget
-tk.Label(homeFrame, text="Welcome to the Springfield Senior Center Page!",
-         bg=bg_color,
-         fg="white",
-         font=("TkMenuFont", 16)
-         ).pack(pady=10)
-
-# button widget
-tk.Button(homeFrame, text="SIGN-IN",
-          font=("TkHeadingFont", 20),
-          bg="#28393a",
-          fg="white",
-          cursor="hand2",
-          activebackground="#e3cf57",
-          activeforeground="black",
-          command=openSignIn
-          ).pack(pady=20)
-
-tk.Button(homeFrame, text="SIGN-OUT",
-          font=("TkHeadingFont", 20),
-          bg="#28393a",
-          fg="white",
-          cursor="hand2",
-          activebackground="#e3cf57",
-          activeforeground="black",
-          command=openSignOut
-          ).pack(pady=20)
-
-tk.Button(homeFrame, text="UPDATE PROFILE",
-          font=("TkHeadingFont", 20),
-          bg="#28393a",
-          fg="white",
-          cursor="hand2",
-          activebackground="#e3cf57",
-          activeforeground="black",
-          command=openUpdateProfile
-          ).pack(pady=20)
+logo_widget.place(x=27.5, y=265)
 
 # run app // displays window until EXIT
 root.mainloop()
