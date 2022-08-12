@@ -23,7 +23,7 @@ def openUpdateProfile():
 
 def openLog():
     # calls the tkVisitorLog.py python script
-    os.system('python3 tkVisitorLog.py')
+    os.system('python3 logEmail.py')
 
 
 # initialize app
