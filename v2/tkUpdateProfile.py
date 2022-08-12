@@ -5,8 +5,9 @@ import json
 
 root = Tk()
 root.title('Springfield Senior Home')
+root.eval("tk::PlaceWindow . center")
 root.geometry("600x700")
-root.configure(bg = "#fae5ac")
+root.configure(bg="#fae5ac")
 
 
 def displayTenants(number: int):
@@ -93,104 +94,105 @@ def back():
 # Code for how the app appears
 title = Label(root, text="Update Profile", font=("Helvetica", 20))
 title.pack(side=TOP, pady=5)
-title.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+title.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 
 apts = ApartmentDatabase("./data/apts.json")
 allVisitors = VisitorManager(apts, "./visitor-logs/")
 
 prompt = Label(root, text="Enter apartment #:")
-prompt.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+prompt.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 prompt.pack()
 
 aptNumber = Entry(root, width=10)
-aptNumber.configure(bg = "white", highlightthickness = 1, fg = "black")
+aptNumber.configure(bg="white", highlightthickness=1, fg="black")
 aptNumber.pack()
 
 enter_btn = Button(root, text="Enter", command=enter)
-enter_btn.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+enter_btn.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 enter_btn.pack(pady=5)
 
 # create a frame with the labels side by side
 labelFrame = Frame(root, width=500, height=10)
-labelFrame.configure(bg = "#fae5ac")
+labelFrame.configure(bg="#fae5ac")
 labelFrame.pack(pady=(10, 0))
 
 tenantLabel = Label(labelFrame, text="Tenants")
-tenantLabel.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+tenantLabel.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 tenantLabel.pack(side=LEFT, pady=10, padx=50)
 
 visitorLabel = Label(labelFrame, text="Visitors")
-visitorLabel.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+visitorLabel.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 visitorLabel.pack(side=RIGHT, pady=10, padx=50)
 
 # create a frame with the listboxes side by side
 listFrame = Frame(root, width=500, height=100)
-listFrame.configure(bg = "#fae5ac")
+listFrame.configure(bg="#fae5ac")
 listFrame.pack()
 
 tenantList = Listbox(listFrame)
-tenantList.configure(bg = "white")
+tenantList.configure(bg="white")
 tenantList.pack(side=LEFT, padx=10)
 
 visitorList = Listbox(listFrame)
-visitorList.configure(bg = "white")
+visitorList.configure(bg="white")
 visitorList.pack(side=RIGHT, padx=10)
 
 # create a frame with the entrys side by side
 entryFrame = Frame(root, width=500, height=50)
-entryFrame.configure(bg = "#fae5ac")
+entryFrame.configure(bg="#fae5ac")
 entryFrame.pack()
 
 tenantEntry = Entry(entryFrame)
-tenantEntry.configure(bg = "white", highlightthickness = 1, fg = "black")
+tenantEntry.configure(bg="white", highlightthickness=1, fg="black")
 tenantEntry.pack(side=LEFT, pady=10, padx=10)
 
 visitorEntry = Entry(entryFrame)
-visitorEntry.configure(bg = "white", highlightthickness = 1, fg = "black")
+visitorEntry.configure(bg="white", highlightthickness=1, fg="black")
 visitorEntry.pack(side=RIGHT, pady=10, padx=10)
 
 
 # create a frame with the add and delete buttons
 buttonFrame = Frame(root, width=500, height=50)
-buttonFrame.configure(bg = "#fae5ac")
+buttonFrame.configure(bg="#fae5ac")
 buttonFrame.pack()
 
 leftFrame = Frame(buttonFrame, width=250, height=50)
-leftFrame.configure(bg = "#fae5ac")
+leftFrame.configure(bg="#fae5ac")
 leftFrame.pack(side=LEFT, padx=(100, 10))
 
 rightFrame = Frame(buttonFrame, width=250, height=50)
-rightFrame.configure(bg = "#fae5ac")
+rightFrame.configure(bg="#fae5ac")
 rightFrame.pack(side=RIGHT, padx=(10, 100))
 
 tenantAdd = Button(leftFrame, text="Add", command=addTenant)
-tenantAdd.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+tenantAdd.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 tenantAdd.pack(side=LEFT, pady=10, padx=10)
 
 tenantDelete = Button(leftFrame, text="Delete", command=deleteTenant)
-tenantDelete.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+tenantDelete.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 tenantDelete.pack(side=RIGHT, pady=10, padx=10)
 
 visitorAdd = Button(rightFrame, text="Add", command=addVisitor)
-visitorAdd.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+visitorAdd.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 visitorAdd.pack(side=LEFT, pady=10, padx=10)
 
 visitorDelete = Button(rightFrame, text="Delete", command=deleteVisitor)
-visitorDelete.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+visitorDelete.configure(
+    bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 visitorDelete.pack(side=RIGHT, pady=10, padx=10)
 
 # rest of buttons
 helpButton = Button(root, text="Help", command=help)
-helpButton.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+helpButton.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 helpButton.pack(pady=5)
 
 backButton = Button(root, text="Back", command=back)
-backButton.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+backButton.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 backButton.pack(pady=5)
 
 global message
 message = Label(root, text="")
-message.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
+message.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
 message.pack(pady=5)
 
 # for widget in root.winfo_children():

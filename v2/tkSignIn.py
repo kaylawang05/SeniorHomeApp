@@ -8,8 +8,9 @@ from backend import *
 
 root = Tk()
 root.title('Springfield Senior Home')
+root.eval("tk::PlaceWindow . center")
 root.geometry("600x800")
-root.configure(bg = "#fae5ac")
+root.configure(bg="#fae5ac")
 
 # Takes in apt # and displays all visitors in that apt who aren't signed in
 
@@ -100,10 +101,10 @@ global message
 message = Label(root, text="")
 message.pack(pady=5)
 
-#changing color of widgets
+# changing color of widgets
 for widget in root.winfo_children():
-    widget.configure(bg = "#fae5ac", highlightbackground = "#fae5ac", fg = "black")
-aptNumber.configure(bg = "white")
-visitorList.configure(bg = "white")
+    widget.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+aptNumber.configure(bg="white")
+visitorList.configure(bg="white")
 
 root.mainloop()
