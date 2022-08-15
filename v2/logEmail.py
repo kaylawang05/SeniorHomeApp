@@ -1,7 +1,7 @@
 import smtplib
-import datetime
 from email.message import EmailMessage
 from tkinter import *
+from backend import *
 
 
 def run():
@@ -13,15 +13,13 @@ def run():
     e = Entry(root, width=50, highlightthickness=1)
     e.configure(bg="white", fg="black")
     e.pack()
-    email = ""
 
     def click():
         email = e.get()
         myLabel = Label(root, text="email sent")
         myLabel.pack()
         # Email stuff
-        date = datetime.date.today()
-        #date = "2022-07-14"
+        date = date_today()
         msg = EmailMessage()
         msg['Subject'] = 'Log delivery for ' + date
         msg['From'] = 'seniorhomespringfield@hotmail.com'
