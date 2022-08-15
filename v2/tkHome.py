@@ -1,29 +1,31 @@
 import tkinter as tk
-import sys
-import os
 from tkinter import *
+
 from PIL import ImageTk
+
+import logEmail
+import tkSignIn
+import tkSignOut
+import tkUpdateProfile
 
 bg_color = "#FAE5AC"
 button_color = "#cd661d"
 
 
 def openSignIn():
-    os.system('python3 tkSignIn.py')  # calls the tkSignIn.py python script
+    tkSignIn.run()  # calls the tkSignIn.py python script
 
 
 def openSignOut():
-    os.system('python3 tkSignOut.py')  # calls the tkSignOut.py python script
+    tkSignOut.run()  # calls the tkSignOut.py python script
 
 
 def openUpdateProfile():
-    # calls the tkUpdateProfile.py python script
-    os.system('python3 tkUpdateProfile.py')
+    tkUpdateProfile.run()  # calls the tkUpdateProfile.py python script
 
 
 def openLog():
-    # calls the tkVisitorLog.py python script
-    os.system('python3 logEmail.py')
+    logEmail.run()  # calls the tkVisitorLog.py python script
 
 
 # initialize app
@@ -90,7 +92,7 @@ logButton = tk.Button(homeFrame, text=" SEND LOG INFO ",
 logo_img = ImageTk.PhotoImage(file="./images/frontentrance.jpeg")
 logo_widget = tk.Label(homeFrame, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
-logo_widget.pack(side="bottom", pady = 100)
+logo_widget.pack(side="bottom", pady=100)
 
 # run app // displays window until EXIT
 root.mainloop()
