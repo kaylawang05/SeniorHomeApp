@@ -22,7 +22,7 @@ def run():
         date = date_today()
         msg = EmailMessage()
         msg['Subject'] = 'Log delivery for ' + date
-        msg['From'] = 'seniorhomespringfield@hotmail.com'
+        msg['From'] = 'dha@xoba.com'
         # Subject to Change
         msg['To'] = email
 
@@ -35,10 +35,10 @@ def run():
             # line below is the problem, you need more perameters thats all dw
             msg.add_attachment(file_data, maintype="application",
                                subtype="csv", filename=file_name)
-        server = smtplib.SMTP('smtp.office365.com', 587)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login("seniorhomespringfield@hotmail.com",
-                     "a#27cap$jAvA_r!L963kilt")
+        with open("password.txt", "r") as f:
+            server.login("dha@xoba.com", f.read().strip())
         print("Login succeeded")
         server.send_message(msg)
         print("email sent")

@@ -43,7 +43,7 @@ homeFrame.pack_propagate(False)
 title = tk.Label(homeFrame, text="Welcome to the Springfield Senior Center Page!",
                  bg=bg_color,
                  fg="#5F5F9E",
-                 font=("TkMenuFont", 30, 'bold')
+                 font=("TkMenuFont", 25, 'bold')
                  ).pack(pady=1)
 
 # button widgets
