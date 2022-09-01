@@ -8,7 +8,7 @@ from backend import *
 
 def run():
     root = Tk()
-    root.title('Springfield Senior Home')
+    root.title("Springfield Senior Home")
     root.eval("tk::PlaceWindow . center")
     root.geometry("600x800")
     root.configure(bg="#fae5ac")
@@ -24,20 +24,23 @@ def run():
                 apt = apts.get_apt(number).unwrap()
                 if not apt.visitors:
                     message.config(
-                        text="There are no registered visitors for this apartment.")
+                        text="There are no registered visitors for this apartment."
+                    )
                 else:
                     hasVisitors = True
                     for visitor in apt.visitors:
                         if (visitor, number) not in allVisitors.visitors:
                             visitorList.insert(END, visitor)
                             hasVisitors = False
-                    if(hasVisitors):
+                    if hasVisitors:
                         message.config(
-                            text="All visitors registered for this apartment are currently signed in.")
+                            text="All visitors registered for this apartment are currently signed in."
+                        )
             case Failure():
                 visitorList.delete(0, END)
                 message.config(
-                    text="Please enter a valid apartment number.\nAsk help from the guard if necessary.")
+                    text="Please enter a valid apartment number.\nAsk help from the guard if necessary."
+                )
 
     # Signs in the selected visitor
 
@@ -54,10 +57,12 @@ def run():
     # Help message that appears when help button is clicked
 
     def help():
-        message.config(text="To sign in, enter the apartment number of the visitor.\n \
+        message.config(
+            text="To sign in, enter the apartment number of the visitor.\n \
     Click 'Enter'.\nYou will see a list of all the registered visitors who are not signed in in the box above.\n \
     Click on the visitor that you want to sign in.\nClick 'Sign in'.\n \
-    If you don't see your name, you are currently signed in,\nor you need to register yourself as a visitor in the homepage.")
+    If you don't see your name, you are currently signed in,\nor you need to register yourself as a visitor in the homepage."
+        )
 
     # I don't know how to go back to the home page so I will make the app close for now
 
@@ -98,8 +103,7 @@ def run():
 
     # changing color of widgets
     for widget in root.winfo_children():
-        widget.configure(
-            bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+        widget.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     aptNumber.configure(bg="white", highlightthickness=1)
     visitorList.configure(bg="white")
 

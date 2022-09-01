@@ -34,58 +34,74 @@ root.title("Springfield Senior Center Homepage")
 root.eval("tk::PlaceWindow . center")
 
 # creating a frame widget
-homeFrame = tk.Frame(root, highlightbackground="#cd661d",
-                     highlightthickness=5, width=1000, height=1000, bg=bg_color)
+homeFrame = tk.Frame(
+    root,
+    highlightbackground="#cd661d",
+    highlightthickness=5,
+    width=1000,
+    height=1000,
+    bg=bg_color,
+)
 homeFrame.grid(row=0, column=0)
 homeFrame.pack_propagate(False)
 
 # label widget
-title = tk.Label(homeFrame, text="Welcome to the Springfield Senior Center Page!",
-                 bg=bg_color,
-                 fg="#5F5F9E",
-                 font=("TkMenuFont", 25, 'bold')
-                 ).pack(pady=1)
+title = tk.Label(
+    homeFrame,
+    text="Welcome to the Springfield Senior Center Page!",
+    bg=bg_color,
+    fg="#5F5F9E",
+    font=("TkMenuFont", 25, "bold"),
+).pack(pady=1)
 
 # button widgets
-sInButton = tk.Button(homeFrame, text="  SIGN-IN  ",
-                      font=("TkHeadingFont", 28),
-                      bg=button_color,
-                      fg="white",
-                      cursor="hand2",
-                      activebackground="#FFFF7F",
-                      activeforeground="black",
-                      command=openSignIn
-                      ).place(x=275, y=100)
+sInButton = tk.Button(
+    homeFrame,
+    text="  SIGN-IN  ",
+    font=("TkHeadingFont", 28),
+    bg=button_color,
+    fg="white",
+    cursor="hand2",
+    activebackground="#FFFF7F",
+    activeforeground="black",
+    command=openSignIn,
+).place(x=275, y=100)
 
-sOutButton = tk.Button(homeFrame, text="SIGN-OUT",
-                       font=("TkHeadingFont", 28),
-                       bg=button_color,
-                       fg="white",
-                       cursor="hand2",
-                       activebackground="#FFFF7F",
-                       activeforeground="black",
-                       command=openSignOut
-                       ).place(x=500, y=100)
+sOutButton = tk.Button(
+    homeFrame,
+    text="SIGN-OUT",
+    font=("TkHeadingFont", 28),
+    bg=button_color,
+    fg="white",
+    cursor="hand2",
+    activebackground="#FFFF7F",
+    activeforeground="black",
+    command=openSignOut,
+).place(x=500, y=100)
 
-updtButton = tk.Button(homeFrame, text="UPDATE PROFILE",
-                       font=("TkHeadingFont", 14),
-                       bg=button_color,
-                       fg="white",
-                       cursor="hand2",
-                       activebackground="#FFFF7F",
-                       activeforeground="black",
-                       command=openUpdateProfile
-                       ).place(x=302, y=200)
+updtButton = tk.Button(
+    homeFrame,
+    text="UPDATE PROFILE",
+    font=("TkHeadingFont", 14),
+    bg=button_color,
+    fg="white",
+    cursor="hand2",
+    activebackground="#FFFF7F",
+    activeforeground="black",
+    command=openUpdateProfile,
+).place(x=302, y=200)
 
-logButton = tk.Button(homeFrame, text=" SEND LOG INFO ",
-                      font=("TkHeadingFont", 14),
-                      bg=button_color,
-                      fg="white",
-                      cursor="hand2",
-                      activebackground="#FFFF7F",
-                      activeforeground="black",
-                      command=openLog
-                      ).place(x=500, y=200)
+logButton = tk.Button(
+    homeFrame,
+    text=" SEND LOG INFO ",
+    font=("TkHeadingFont", 14),
+    bg=button_color,
+    fg="white",
+    cursor="hand2",
+    activebackground="#FFFF7F",
+    activeforeground="black",
+    command=openLog,
+).place(x=500, y=200)
 
 # homeFrame widgets
 # IMAGE DIMENSIONS NEED TO BE 930x432

@@ -5,7 +5,7 @@ from backend import *
 
 def run():
     root = Tk()
-    root.title('Springfield Senior Home')
+    root.title("Springfield Senior Home")
     root.eval("tk::PlaceWindow . center")
     root.geometry("600x700")
     root.configure(bg="#fae5ac")
@@ -14,8 +14,7 @@ def run():
         apt = apts.get_apt(number).unwrap()
         tenantList.delete(0, END)
         if not apt.tenants:
-            message.config(
-                text="There are no registered tenants for this apartment.")
+            message.config(text="There are no registered tenants for this apartment.")
         # Try to code to only insert visitors signed in already
         for tenant in apt.tenants:
             tenantList.insert(END, tenant)
@@ -24,8 +23,7 @@ def run():
         apt = apts.get_apt(number).unwrap()
         visitorList.delete(0, END)
         if not apt.visitors:
-            message.config(
-                text="There are no registered visitors for this apartment.")
+            message.config(text="There are no registered visitors for this apartment.")
         # Try to code to only insert visitors signed in already
         for visitor in apt.visitors:
             visitorList.insert(END, visitor)
@@ -43,7 +41,8 @@ def run():
 
             case Failure():
                 message.config(
-                    text="Please enter a valid apartment number.\nAsk help from the guard if necessary.")
+                    text="Please enter a valid apartment number.\nAsk help from the guard if necessary."
+                )
 
     def addTenant():
         number = int(aptNumber.get())
@@ -72,10 +71,12 @@ def run():
     # Help message that appears when help button is clicked
 
     def help():
-        message.config(text="Enter the apartment number to update its profile\n \
+        message.config(
+            text="Enter the apartment number to update its profile\n \
     Click 'Enter'.\nYou will see a list of all the registered tenants and visitors in the boxes above.\n \
     To add a tenant or visitor, enter the name in the box below the list\nClick 'Add'.\n \
-    To delete a tenant or visitor, click on the name. \n Click 'Delete'\n")
+    To delete a tenant or visitor, click on the name. \n Click 'Delete'\n"
+        )
 
     # I don't know how to go back to the home page so I will make the app close for now
 
@@ -111,8 +112,7 @@ def run():
     aptNumber.pack()
 
     enter_btn = Button(root, text="Enter", command=enter)
-    enter_btn.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    enter_btn.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     enter_btn.pack(pady=5)
 
     # create a frame with the labels side by side
@@ -121,13 +121,11 @@ def run():
     labelFrame.pack(pady=(10, 0))
 
     tenantLabel = Label(labelFrame, text="Tenants")
-    tenantLabel.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    tenantLabel.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     tenantLabel.pack(side=LEFT, pady=10, padx=50)
 
     visitorLabel = Label(labelFrame, text="Visitors")
-    visitorLabel.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    visitorLabel.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     visitorLabel.pack(side=RIGHT, pady=10, padx=50)
 
     # create a frame with the listboxes side by side
@@ -176,34 +174,28 @@ def run():
     rightFrame.pack(side=RIGHT, padx=(10, 100))
 
     tenantAdd = Button(leftFrame, text="Add", command=addTenant)
-    tenantAdd.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    tenantAdd.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     tenantAdd.pack(side=LEFT, pady=10, padx=10)
 
     tenantDelete = Button(leftFrame, text="Delete", command=deleteTenant)
-    tenantDelete.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    tenantDelete.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     tenantDelete.pack(side=RIGHT, pady=10, padx=10)
 
     visitorAdd = Button(rightFrame, text="Add", command=addVisitor)
-    visitorAdd.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    visitorAdd.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     visitorAdd.pack(side=LEFT, pady=10, padx=10)
 
     visitorDelete = Button(rightFrame, text="Delete", command=deleteVisitor)
-    visitorDelete.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    visitorDelete.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     visitorDelete.pack(side=RIGHT, pady=10, padx=10)
 
     # rest of buttons
     helpButton = Button(root, text="Help", command=help)
-    helpButton.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    helpButton.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     helpButton.pack(pady=5)
 
     backButton = Button(root, text="Back", command=back)
-    backButton.configure(
-        bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
+    backButton.configure(bg="#fae5ac", highlightbackground="#fae5ac", fg="black")
     backButton.pack(pady=5)
 
     global message
