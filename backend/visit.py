@@ -18,7 +18,7 @@ class VisitorManager:
             with open(self.file_path, "r") as f:
                 csvreader = csv.reader(f)
                 head = next(csvreader)
-                for (number, name, sign_in_time, sign_out_time) in csv.reader(f):
+                for number, name, sign_in_time, sign_out_time in csv.reader(f):
                     if sign_out_time == "":
                         self.visitors[(name, int(number))] = (
                             sign_in_time,
